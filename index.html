@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dancy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #a8e063 0%, #56ab2f 100%);
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .deer-container {
+            position: relative;
+            height: 400px;
+        }
+        
+        .deer {
+            transition: all 0.3s ease;
+        }
+        
+        .dance {
+            animation: dance 1s infinite alternate;
+        }
+        
+        @keyframes dance {
+            0% { transform: rotate(-5deg) translateY(0); }
+            25% { transform: rotate(5deg) translateY(-10px); }
+            50% { transform: rotate(-5deg) translateY(0); }
+            75% { transform: rotate(5deg) translateY(-10px); }
+            100% { transform: rotate(-5deg) translateY(0); }
+        }
+        
+        .jump {
+            animation: jump 0.8s;
+        }
+        
+        @keyframes jump {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-100px); }
+            100% { transform: translateY(0); }
+        }
+        
+        .sing {
+            animation: sing 1s infinite;
+        }
+        
+        @keyframes sing {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .speech-bubble {
+            position: absolute;
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            max-width: 200px;
+            top: 50px;
+            right: 50%;
+            transform: translateX(180px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .speech-bubble:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+            border-right-color: white;
+            border-left: 0;
+            margin-top: -15px;
+            margin-left: -15px;
+        }
+        
+        .music-note {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0;
+            animation: float 2s forwards;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+        
+        .btn {
+            transition: all 0.2s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-xl p-8 max-w-4xl w-full">
+        <h1 class="text-3xl font-bold text-center mb-6 text-green-800">MY DANCY</h1>
+        
+        <div class="deer-container flex justify-center items-center mb-8">
+            <div id="deer" class="deer">
+                <svg width="200" height="250" viewBox="0 0 200 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Deer body -->
+                    <ellipse cx="100" cy="160" rx="50" ry="40" fill="#C19A6B" />
+                    <!-- Neck -->
+                    <path d="M100 120C110 100 110 80 100 60" stroke="#C19A6B" stroke-width="20" stroke-linecap="round" />
+                    <!-- Head -->
+                    <circle cx="100" cy="50" r="25" fill="#C19A6B" />
+                    <!-- Eyes -->
+                    <circle cx="90" cy="45" r="4" fill="black" />
+                    <circle cx="110" cy="45" r="4" fill="black" />
+                    <!-- Nose -->
+                    <ellipse cx="100" cy="60" rx="8" ry="5" fill="#8B4513" />
+                    <!-- Ears -->
+                    <path d="M75 35C70 20 65 15 60 10" stroke="#C19A6B" stroke-width="8" stroke-linecap="round" />
+                    <path d="M125 35C130 20 135 15 140 10" stroke="#C19A6B" stroke-width="8" stroke-linecap="round" />
+                    <!-- Antlers -->
+                    <path d="M85 30C75 15 65 10 55 5" stroke="#8B4513" stroke-width="4" stroke-linecap="round" />
+                    <path d="M80 25C70 15 65 5 60 0" stroke="#8B4513" stroke-width="4" stroke-linecap="round" />
+                    <path d="M115 30C125 15 135 10 145 5" stroke="#8B4513" stroke-width="4" stroke-linecap="round" />
+                    <path d="M120 25C130 15 135 5 140 0" stroke="#8B4513" stroke-width="4" stroke-linecap="round" />
+                    <!-- Legs -->
+                    <line x1="80" y1="200" x2="80" y2="230" stroke="#C19A6B" stroke-width="10" stroke-linecap="round" />
+                    <line x1="120" y1="200" x2="120" y2="230" stroke="#C19A6B" stroke-width="10" stroke-linecap="round" />
+                    <line x1="90" y1="200" x2="90" y2="230" stroke="#C19A6B" stroke-width="10" stroke-linecap="round" />
+                    <line x1="110" y1="200" x2="110" y2="230" stroke="#C19A6B" stroke-width="10" stroke-linecap="round" />
+                    <!-- Tail -->
+                    <path d="M150 160C160 150 165 155 170 160" stroke="#C19A6B" stroke-width="8" stroke-linecap="round" />
+                    <!-- Mouth (smile) -->
+                    <path id="mouth" d="M90 65C95 70 105 70 110 65" stroke="black" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <div id="speech" class="speech-bubble">
+                    <p id="speech-text" class="text-center font-medium"></p>
+                </div>
+                <div id="notes-container"></div>
+            </div>
+        </div>
+        
+        <div class="flex flex-wrap justify-center gap-4">
+            <button id="hello-btn" class="btn bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-full shadow-md">
+                Say Hello
+            </button>
+            <button id="dance-btn" class="btn bg-purple-500 hover:bg-purple-600 text-white font-semibold py-3 px-6 rounded-full shadow-md">
+                Dance
+            </button>
+            <button id="jump-btn" class="btn bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-full shadow-md">
+                Jump
+            </button>
+            <button id="sing-btn" class="btn bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-full shadow-md">
+                Sing a Song
+            </button>
+        </div>
+        
+        <div class="mt-8 text-center">
+            <p class="text-sm text-gray-600"> Enjoy the MY DANCY deer!</p>
+            <p class="text-sm text-gray-500 mt-2">HOPE YOU ENJOY IT!</p>
+        </div>
+    </div>
+    <audio id="singing-audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deer = document.getElementById('deer');
+            const speech = document.getElementById('speech');
+            const speechText = document.getElementById('speech-text');
+            const notesContainer = document.getElementById('notes-container');
+            const mouth = document.getElementById('mouth');
+            
+            // Function to reset deer state
+            function resetDeer() {
+                deer.classList.remove('dance', 'jump', 'sing');
+                speech.style.opacity = '0';
+                mouth.setAttribute('d', 'M90 65C95 70 105 70 110 65');
+            }
+            
+            // Hello button
+            document.getElementById('hello-btn').addEventListener('click', function() {
+                resetDeer();
+                speechText.textContent = "Hello there! I'm a yoour dancy here!";
+                speech.style.opacity = '1';
+                
+                // Change mouth to speaking shape
+                mouth.setAttribute('d', 'M90 65C95 68 105 68 110 65');
+                
+                // Reset mouth after 2 seconds
+                setTimeout(() => {
+                    mouth.setAttribute('d', 'M90 65C95 70 105 70 110 65');
+                }, 2000);
+                
+                // Hide speech bubble after 3 seconds
+                setTimeout(() => {
+                    speech.style.opacity = '0';
+                }, 3000);
+            });
+            
+            // Dance button
+            document.getElementById('dance-btn').addEventListener('click', function() {
+                resetDeer();
+                deer.classList.add('dance');
+                speechText.textContent = "Let's Dance";
+                speech.style.opacity = '1';
+                
+                // Hide speech bubble after 3 seconds
+                setTimeout(() => {
+                    speech.style.opacity = '0';
+                }, 3000);
+                
+                // Stop dancing after 5 seconds
+                setTimeout(() => {
+                    deer.classList.remove('dance');
+                }, 5000);
+            });
+            
+            // Jump button
+            document.getElementById('jump-btn').addEventListener('click', function() {
+                resetDeer();
+                deer.classList.add('jump');
+                speechText.textContent = "Wheee! Let's jump!";
+                speech.style.opacity = '1';
+                
+                // Hide speech bubble after 2 seconds
+                setTimeout(() => {
+                    speech.style.opacity = '0';
+                }, 2000);
+                
+                // Remove jump class after animation completes
+                setTimeout(() => {
+                    deer.classList.remove('jump');
+                }, 800);
+            });
+            
+            // Sing button
+            document.getElementById('sing-btn').addEventListener('click', function() {
+                resetDeer();
+                deer.classList.add('sing');
+                speechText.textContent = "🎵 La la la, I'm singing! 🎵";
+                speech.style.opacity = '1';
+                mouth.setAttribute('d', 'M90 65C95 60 105 60 110 65');
+                
+                // Create music notes animation
+                const audio =
+                document.getElementById('singing-audio');
+                audio.play();
+                createMusicNotes();
+                
+                // Stop singing after 5 seconds
+                setTimeout(() => {
+                    deer.classList.remove('sing');
+                    speech.style.opacity = '0';
+                    mouth.setAttribute('d', 'M90 65C95 70 105 70 110 65');
+                    audio.pause();
+                    audio.currentTime=0;
+                }, 5000);
+            });
+            
+            // Function to create floating music notes
+            function createMusicNotes() {
+                const notes = ['♪', '♫', '🎵', '🎶'];
+                const positions = [
+                    { top: '30px', left: '150px' },
+                    { top: '10px', left: '170px' },
+                    { top: '50px', left: '180px' },
+                    { top: '20px', left: '200px' }
+                ];
+                
+                // Clear previous notes
+                notesContainer.innerHTML = '';
+                
+                // Create new notes
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(() => {
+                        const note = document.createElement('div');
+                        note.className = 'music-note';
+                        note.textContent = notes[Math.floor(Math.random() * notes.length)];
+                        
+                        const pos = positions[Math.floor(Math.random() * positions.length)];
+                        note.style.top = pos.top;
+                        note.style.left = pos.left;
+                        
+                        notesContainer.appendChild(note);
+                        
+                        // Remove note after animation
+                        setTimeout(() => {
+                            note.remove();
+                        }, 2000);
+                    }, i * 600);
+                }
+            }
+            
+            // Simulate background music notification
+            const musicNotification = document.createElement('div');
+            musicNotification.className = 'fixed bottom-4 left-4 bg-white p-3 rounded-lg shadow-lg text-sm';
+            musicNotification.innerHTML = '🎵 Background music playing (simulated)';
+            document.body.appendChild(musicNotification);
+            
+            setTimeout(() => {
+                musicNotification.style.opacity = '0';
+                musicNotification.style.transition = 'opacity 1s ease';
+                setTimeout(() => {
+                    musicNotification.remove();
+                }, 1000);
+            }, 5000);
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'967c338884fc7ef5',t:'MTc1Mzk1NTUyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
